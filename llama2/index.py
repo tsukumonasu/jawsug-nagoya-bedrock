@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger()
 logger.setLevel(logging.getLevelName(os.getenv('LOG_LEVEL', 'INFO')))
-bedrock_runtime_client = boto3.client('bedrock-runtime')
+bedrock_runtime_client = boto3.client('bedrock-runtime', os.getenv("AWS_DEFAULT_REGION"))
 
 
 def get_completion(user_prompt):

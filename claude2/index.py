@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger()
 logger.setLevel(logging.getLevelName(os.getenv('LOG_LEVEL', 'INFO')))
-bedrock_runtime_client = boto3.client('bedrock-runtime')
+bedrock_runtime_client = boto3.client('bedrock-runtime', os.getenv("AWS_DEFAULT_REGION"))
 
 
 def get_completion(user_prompt):
@@ -13,8 +13,9 @@ def get_completion(user_prompt):
     accept = 'application/json'
     content_type = 'application/json'
 
+    prompt = "Human: " + user_prompt + "\n\nAssistant:"
     body = json.dumps({
-        "prompt": user_prompt,
+        "prompt": prompt,
         "max_tokens_to_sample": 600,
     })
 

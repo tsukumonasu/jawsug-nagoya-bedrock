@@ -7,7 +7,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.getLevelName(os.getenv('LOG_LEVEL', 'INFO')))
 
 kendra_client = boto3.client('kendra')
-bedrock_runtime_client = boto3.client('bedrock-runtime')
+bedrock_runtime_client = boto3.client('bedrock-runtime', os.getenv("AWS_DEFAULT_REGION"))
 
 
 # Kendra から検索結果を取得
